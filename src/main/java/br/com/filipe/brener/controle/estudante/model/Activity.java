@@ -28,17 +28,21 @@ public class Activity implements Serializable{
     @Column(name = "content", nullable = true)
     private String content;
     
-    @Column(name = "grade", nullable = true)
-    private Float grade;
+    @Column(name = "received_grade", nullable = true)
+    private Float receivedGrade;
+    
+    @Column(name = "total_grade", nullable = true)
+    private Float totalGrade;
     
     @Column(name = "notes", nullable = true)
     private String notes;
 
-    public Activity(String title, LocalDateTime date, String content, Float grade, String notes) {
+    public Activity(String title, LocalDateTime date, String content, Float receivedgrade,Float totalGrade, String notes) {
         this.title = title;
         this.date = date;
         this.content = content;
-        this.grade = grade;
+        this.receivedGrade = receivedgrade;
+        this.totalGrade = totalGrade;
         this.notes = notes;
     }
 
@@ -69,12 +73,20 @@ public class Activity implements Serializable{
         this.notes = notes;
     }
 
-    public Float getGrade() {
-        return grade;
+    public Float getReceivedGrade() {
+        return receivedGrade;
     }
 
-    public void setGrade(Float grade) {
-        this.grade = grade;
+    public void setReceivedGrade(Float receivedGrade) {
+        this.receivedGrade = receivedGrade;
+    }
+
+    public Float getTotalGrade() {
+        return totalGrade;
+    }
+
+    public void setTotalGrade(Float totalGrade) {
+        this.totalGrade = totalGrade;
     }
 
     public String getContent() {
