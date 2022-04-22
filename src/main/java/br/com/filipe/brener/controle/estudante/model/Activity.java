@@ -37,7 +37,7 @@ public class Activity implements Serializable{
     @Column(name = "notes", nullable = true)
     private String notes;
 
-    public Activity(String title, LocalDateTime date, String content, Float receivedgrade,Float totalGrade, String notes) {
+    public Activity(String title, LocalDateTime date, String content, Float receivedgrade, Float totalGrade, String notes) {
         this.title = title;
         this.date = date;
         this.content = content;
@@ -63,7 +63,6 @@ public class Activity implements Serializable{
     public void setId(Long id) {
         this.id = id;
     }
-
 
     public String getNotes() {
         return notes;
