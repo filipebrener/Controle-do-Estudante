@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.filipe.brener</groupId>
-	<artifactId>controle-do-estudante</artifactId>
+	<artifactId>controle-do-estudante-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Controle do Estudante</name>
+	<name>API Controle do Estudante</name>
 	<description>Projeto Demo Controle do Estudante</description>
 	<properties>
 		<java.version>1.8</java.version>
