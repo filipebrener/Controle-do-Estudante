@@ -41,6 +41,7 @@ public class SubjectController {
     }
 
     @GetMapping
+    @RequestMapping("/list")
     public ResponseEntity<List<Subject>> list(){
         List<Subject> subjectList = new ArrayList<>();
         HttpStatus status;
@@ -55,6 +56,7 @@ public class SubjectController {
     }
 
     @PostMapping
+    @RequestMapping("/save")
     public ResponseEntity<Subject> save(@RequestBody Subject Subject){
         Subject savedSubject = null;
         HttpStatus status = HttpStatus.OK;
@@ -68,7 +70,7 @@ public class SubjectController {
     }
 
     @DeleteMapping
-    @RequestMapping("/{id}")
+    @RequestMapping("/delete/{id}")
     public ResponseEntity<Subject> delete(@PathVariable String id){
         Subject Subject = null;
         HttpStatus status;
@@ -84,7 +86,7 @@ public class SubjectController {
     }
 
     @PutMapping
-    @RequestMapping("/{id}")
+    @RequestMapping("/edit/{id}")
     public ResponseEntity<Subject> edit(@PathVariable String id,@RequestBody Subject newSubject){
         Subject oldSubject = null;
         Subject editedSubject = null;

@@ -41,6 +41,7 @@ public class TeacherController {
     }
 
     @GetMapping
+    @RequestMapping("/list")
     public ResponseEntity<List<Teacher>> list(){
         List<Teacher> teacherList = new ArrayList<>();
         HttpStatus status;
@@ -55,6 +56,7 @@ public class TeacherController {
     }
 
     @PostMapping
+    @RequestMapping("/save")
     public ResponseEntity<Teacher> save(@RequestBody Teacher Teacher){
         Teacher savedTeacher = null;
         HttpStatus status = HttpStatus.OK;
@@ -68,7 +70,7 @@ public class TeacherController {
     }
 
     @DeleteMapping
-    @RequestMapping("/{id}")
+    @RequestMapping("/delete/{id}")
     public ResponseEntity<Teacher> delete(@PathVariable String id){
         Teacher Teacher = null;
         HttpStatus status;
@@ -84,7 +86,7 @@ public class TeacherController {
     }
 
     @PutMapping
-    @RequestMapping("/{id}")
+    @RequestMapping("/edit/{id}")
     public ResponseEntity<Teacher> edit(@PathVariable String id,@RequestBody Teacher newTeacher){
         Teacher oldTeacher = null;
         Teacher editedTeacher = null;

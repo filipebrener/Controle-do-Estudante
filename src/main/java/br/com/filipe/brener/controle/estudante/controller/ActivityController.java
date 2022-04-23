@@ -46,6 +46,7 @@ public class ActivityController {
     }
 
     @GetMapping
+    @RequestMapping("/list")
     public ResponseEntity<List<Activity>> list(){
         List<Activity> activityList = new ArrayList<>();
         HttpStatus status;
@@ -60,6 +61,7 @@ public class ActivityController {
     }
 
     @PostMapping
+    @RequestMapping("/save/{id}")
     public ResponseEntity<Activity> save(@RequestBody Activity activity){
         Activity savedActivity = null;
         HttpStatus status = HttpStatus.OK;
@@ -73,7 +75,7 @@ public class ActivityController {
     }
 
     @DeleteMapping
-    @RequestMapping("/{id}")
+    @RequestMapping("/delete/{id}")
     public ResponseEntity<Activity> delete(@PathVariable String id){
         Activity activity = null;
         HttpStatus status;
@@ -89,8 +91,8 @@ public class ActivityController {
     }
 
     @PutMapping
-    @RequestMapping("/{id}")
-    public ResponseEntity<Activity> edit(@PathVariable String id,@RequestBody Activity newActivity){
+    @RequestMapping("/edit/{id}")
+    public ResponseEntity<Activity> edit(@PathVariable String id, @RequestBody Activity newActivity){
         Activity oldActivity = null;
         Activity editedActivity = null;
         HttpStatus status;
