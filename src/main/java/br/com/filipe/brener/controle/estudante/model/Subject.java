@@ -80,5 +80,20 @@ public class Subject {
         this.missedClasses = missedClasses;
     }
 
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public Teacher getTeacher() {
+        return this.teacher;
+    }
+
+    public void edit(Subject subject){
+        this.code = subject.getCode();
+        this.missedClasses = subject.getMissedClasses();
+        this.name = subject.getName();
+        this.numberOfCredits = subject.getNumberOfCredits();
+        this.teacher = subject.getTeacher();
+    }
 
 }
