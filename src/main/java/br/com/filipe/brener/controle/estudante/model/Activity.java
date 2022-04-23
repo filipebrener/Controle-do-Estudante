@@ -46,6 +46,15 @@ public class Activity implements Serializable{
         this.notes = notes;
     }
 
+    public Activity(Activity activity){
+        this.title = activity.getTitle();
+        this.date = activity.getDate();
+        this.content = activity.getContent();
+        this.receivedGrade = activity.getReceivedGrade();
+        this.totalGrade = activity.getTotalGrade();
+        this.notes = activity.getNotes();
+    }
+
     public Activity(){}
 
     public String getTitle() {
@@ -107,6 +116,15 @@ public class Activity implements Serializable{
     @Override
     public String toString(){
         return "Atividade: " + this.id + "\nTitulo: " + this.title + "\nData: " + this.date;
+    }
+
+    public void edit(Activity activity){
+        this.title = activity.getTitle();
+        this.date = activity.getDate();
+        this.content = activity.getContent();
+        this.receivedGrade = activity.getReceivedGrade();
+        this.totalGrade = activity.getTotalGrade();
+        this.notes = activity.getNotes();
     }
 
 }

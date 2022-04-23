@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -68,6 +70,42 @@ public class ActivityController {
            status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<>(savedActivity,status);
+    }
+
+    @DeleteMapping
+    @RequestMapping("/{id}")
+    public ResponseEntity<Activity> delete(@PathVariable String id){
+        Activity activity = null;
+        HttpStatus status;
+        try {
+            activity = activityRepository.getById(Long.valueOf(id));
+            activityRepository.delete(activity);
+            status = (activity != null) ? HttpStatus.OK : HttpStatus.NOT_FOUND;
+        } catch (Exception e) {
+            log.error("Erro ao pegar uma atividade",e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(activity,status);
+    }
+
+    @PutMapping
+    @RequestMapping("/{id}")
+    public ResponseEntity<Activity> edit(@PathVariable String id,@RequestBody Activity newActivity){
+        Activity oldActivity = null;
+        Activity editedActivity = null;
+        HttpStatus status;
+        try {
+            oldActivity = activityRepository.getById(Long.valueOf(id));
+            if (oldActivity != null){
+                oldActivity.edit(newActivity);
+                editedActivity = activityRepository.save(oldActivity);
+            }
+            status = (editedActivity != null) ? HttpStatus.OK : HttpStatus.NOT_FOUND;
+        } catch (Exception e) {
+            log.error("Erro ao pegar uma atividade",e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(editedActivity,status);
     }
 
 }
