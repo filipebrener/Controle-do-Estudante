@@ -50,6 +50,9 @@ public class Teacher {
         this.id = id;
     }
 
-
+    public void edit(Teacher teacher){
+        this.email = teacher.getEmail();
+        this.name = teacher.getName();
+    }
 
 }
