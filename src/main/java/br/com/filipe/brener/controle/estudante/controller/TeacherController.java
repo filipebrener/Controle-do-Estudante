@@ -3,6 +3,8 @@ package br.com.filipe.brener.controle.estudante.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,8 @@ import br.com.filipe.brener.controle.estudante.repository.TeacherRepository;
 @RequestMapping("/teacher")
 public class TeacherController {
 
+    private static final Logger log = LogManager.getLogger(ActivityController.class);
+
     @Autowired
     private TeacherRepository teacherRepository;
 
@@ -34,7 +38,7 @@ public class TeacherController {
             teacher = teacherRepository.getById(Long.valueOf(id));
             status = (teacher != null) ? HttpStatus.OK : HttpStatus.NOT_FOUND;
         } catch (Exception e) {
-            // log.error("Erro ao pegar uma atividade",e.getMessage());
+            log.error("Erro ao encontrar um professor!",e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<>(teacher,status);
@@ -49,21 +53,21 @@ public class TeacherController {
             teacherList = teacherRepository.findAll();
             status = teacherList.size() > 0 ? HttpStatus.OK : HttpStatus.NOT_FOUND;
         } catch(Exception e){
-            // log.error("Erro ao pegar a lista de atividades",e.getMessage());
+            log.error("Erro ao pegar a lista de professores!",e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<>(teacherList,status);
     }
 
     @PostMapping
-    @RequestMapping("/save")
-    public ResponseEntity<Teacher> save(@RequestBody Teacher Teacher){
+    @RequestMapping("/create")
+    public ResponseEntity<Teacher> create(@RequestBody Teacher Teacher){
         Teacher savedTeacher = null;
         HttpStatus status = HttpStatus.OK;
         try {
             savedTeacher = teacherRepository.save(Teacher);
         } catch (Exception e) {
-        //    log.error("Erro ao salvar uma atividade",e.getMessage());
+           log.error("Erro ao criar um professor!",e.getMessage());
            status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<>(savedTeacher,status);
@@ -79,7 +83,7 @@ public class TeacherController {
             teacherRepository.delete(Teacher);
             status = (Teacher != null) ? HttpStatus.OK : HttpStatus.NOT_FOUND;
         } catch (Exception e) {
-            // log.error("Erro ao pegar uma atividade",e.getMessage());
+            log.error("Erro ao apagar um professor",e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<>(Teacher,status);
@@ -99,7 +103,7 @@ public class TeacherController {
             }
             status = (editedTeacher != null) ? HttpStatus.OK : HttpStatus.NOT_FOUND;
         } catch (Exception e) {
-            // log.error("Erro ao pegar uma atividade",e.getMessage());
+            log.error("Erro ao editar um professor",e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<>(editedTeacher,status);

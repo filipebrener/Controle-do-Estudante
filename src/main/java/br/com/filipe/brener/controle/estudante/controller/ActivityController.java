@@ -39,7 +39,7 @@ public class ActivityController {
             activity = activityRepository.getById(Long.valueOf(id));
             status = (activity != null) ? HttpStatus.OK : HttpStatus.NOT_FOUND;
         } catch (Exception e) {
-            log.error("Erro ao pegar uma atividade",e.getMessage());
+            log.error("Erro ao encontrar uma atividade!",e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<>(activity,status);
@@ -54,21 +54,21 @@ public class ActivityController {
             activityList = activityRepository.findAll(Sort.by(Sort.Direction.ASC, "date"));
             status = activityList.size() > 0 ? HttpStatus.OK : HttpStatus.NOT_FOUND;
         } catch(Exception e){
-            log.error("Erro ao pegar a lista de atividades",e.getMessage());
+            log.error("Erro ao buscar a lista de atividades!",e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<>(activityList,status);
     }
 
     @PostMapping
-    @RequestMapping("/save/{id}")
-    public ResponseEntity<Activity> save(@RequestBody Activity activity){
+    @RequestMapping("/create")
+    public ResponseEntity<Activity> create(@RequestBody Activity activity){
         Activity savedActivity = null;
         HttpStatus status = HttpStatus.OK;
         try {
             savedActivity = activityRepository.save(activity);
         } catch (Exception e) {
-           log.error("Erro ao salvar uma atividade",e.getMessage());
+           log.error("Erro ao criar uma atividade!");
            status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<>(savedActivity,status);
@@ -84,7 +84,7 @@ public class ActivityController {
             activityRepository.delete(activity);
             status = (activity != null) ? HttpStatus.OK : HttpStatus.NOT_FOUND;
         } catch (Exception e) {
-            log.error("Erro ao pegar uma atividade",e.getMessage());
+            log.error("Erro ao apagar uma atividade!",e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<>(activity,status);
@@ -104,7 +104,8 @@ public class ActivityController {
             }
             status = (editedActivity != null) ? HttpStatus.OK : HttpStatus.NOT_FOUND;
         } catch (Exception e) {
-            log.error("Erro ao pegar uma atividade",e.getMessage());
+            log.error("Erro ao editar uma atividade!",e.getMessage());
+            System.out.println(e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<>(editedActivity,status);

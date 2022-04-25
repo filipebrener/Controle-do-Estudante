@@ -3,6 +3,8 @@ package br.com.filipe.brener.controle.estudante.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,8 @@ import br.com.filipe.brener.controle.estudante.repository.SubjectRepository;
 @RequestMapping("/subject")
 public class SubjectController {
     
+    private static final Logger log = LogManager.getLogger(ActivityController.class);
+    
     @Autowired
     private SubjectRepository subjectRepository;
 
@@ -34,7 +38,7 @@ public class SubjectController {
             subject = subjectRepository.getById(Long.valueOf(id));
             status = (subject != null) ? HttpStatus.OK : HttpStatus.NOT_FOUND;
         } catch (Exception e) {
-            // log.error("Erro ao pegar uma atividade",e.getMessage());
+            log.error("Erro ao encontrar uma disciplina!",e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<>(subject,status);
@@ -49,21 +53,21 @@ public class SubjectController {
             subjectList = subjectRepository.findAll();
             status = subjectList.size() > 0 ? HttpStatus.OK : HttpStatus.NOT_FOUND;
         } catch(Exception e){
-            // log.error("Erro ao pegar a lista de atividades",e.getMessage());
+            log.error("Erro ao buscar a lista de disciplinas!",e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<>(subjectList,status);
     }
 
     @PostMapping
-    @RequestMapping("/save")
-    public ResponseEntity<Subject> save(@RequestBody Subject Subject){
+    @RequestMapping("/create")
+    public ResponseEntity<Subject> create(@RequestBody Subject subject){
         Subject savedSubject = null;
         HttpStatus status = HttpStatus.OK;
         try {
-            savedSubject = subjectRepository.save(Subject);
+            savedSubject = subjectRepository.save(subject);
         } catch (Exception e) {
-        //    log.error("Erro ao salvar uma atividade",e.getMessage());
+           log.error("Erro ao criar uma disciplina!",e.getMessage());
            status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<>(savedSubject,status);
@@ -79,7 +83,7 @@ public class SubjectController {
             subjectRepository.delete(Subject);
             status = (Subject != null) ? HttpStatus.OK : HttpStatus.NOT_FOUND;
         } catch (Exception e) {
-            // log.error("Erro ao pegar uma atividade",e.getMessage());
+            log.error("Erro ao apagar uma disciplina",e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<>(Subject,status);
@@ -99,7 +103,7 @@ public class SubjectController {
             }
             status = (editedSubject != null) ? HttpStatus.OK : HttpStatus.NOT_FOUND;
         } catch (Exception e) {
-            // log.error("Erro ao pegar uma atividade",e.getMessage());
+            log.error("Erro ao editar uma disciplina",e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<>(editedSubject,status);
