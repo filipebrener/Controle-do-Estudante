@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -29,8 +31,9 @@ public class User {
     private String password;
     
     @OneToMany
+    @JoinTable(name = "user_activity", inverseJoinColumns = @JoinColumn(name = "activity_id"))
     private List<Activity> activities;
-    
+
     public User(String email, String name, String password) {
         this.email = email;
         this.name = name;

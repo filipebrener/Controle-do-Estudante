@@ -1,10 +1,13 @@
 package br.com.filipe.brener.controle.estudante.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -21,6 +24,9 @@ public class Teacher {
     
     @Column(name = "email", nullable = true)
     private String email;
+
+    @OneToMany
+    private List<Subject> subject;
 
     public Teacher(String name, String email){
         this.setName(name);
