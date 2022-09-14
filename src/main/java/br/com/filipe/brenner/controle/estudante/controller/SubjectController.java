@@ -62,7 +62,7 @@ public class SubjectController {
         }
     }
 
-    @PatchMapping("/edit")
+    @PutMapping("/edit")
     public ResponseEntity<Object> edit(@RequestBody EditSubjectRequestDTO payload){
         try {
             Subject newSubject = service.edit(payload);
