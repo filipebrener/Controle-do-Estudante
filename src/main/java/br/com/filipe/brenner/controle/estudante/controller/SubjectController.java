@@ -40,6 +40,18 @@ public class SubjectController {
         }
     }
 
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Object> get(@PathVariable(name = "id") Long id){
+        try {
+            Subject subject = service.getSubjectById(id);
+            SubjectResponseDTO responseBody = new SubjectResponseDTO(subject);
+            return ResponseWrapper.createResponse(responseBody,true,HttpStatus.OK);
+        } catch (NotFoundException e) {
+            logger.error(e.getMessage(), e);
+            return ResponseWrapper.createResponse(e,false, HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping("/listAll")
     public ResponseEntity<Object> list(){
         try {
