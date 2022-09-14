@@ -1,44 +1,19 @@
-package br.com.filipe.brenner.controle.estudante.model;
+package br.com.filipe.brenner.controle.estudante.dto.subject;
 
-import br.com.filipe.brenner.controle.estudante.dto.subject.CreateSubjectRequestDTO;
+import br.com.filipe.brenner.controle.estudante.model.Teacher;
 
-import javax.persistence.*;
 
-@Entity
-
-public class Subject {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class CreateSubjectRequestDTO {
 
     private String name;
 
     private String code;
 
-    @ManyToOne
-    @JoinColumn(name = "TEACHER_ID", referencedColumnName = "ID")
     private Teacher teacher;
 
     private Float totalPoints;
 
     private Float minimumAverage;
-
-    public Subject(){
-        // Construtor padrão
-    }
-
-    public Subject(CreateSubjectRequestDTO payload) {
-        name = payload.getName();
-        code = payload.getCode();
-        teacher = payload.getTeacher();
-        totalPoints = payload.getTotalPoints();
-        minimumAverage = payload.getMinimumAverage();
-    }
-
-    public Long getId() {
-        return id;
-    }
 
     public String getName() {
         return name;
@@ -79,10 +54,4 @@ public class Subject {
     public void setMinimumAverage(Float minimumAverage) {
         this.minimumAverage = minimumAverage;
     }
-
-    @Override
-    public String toString(){
-        return String.format("%s - %s",this.code, this.name);
-    }
-
 }

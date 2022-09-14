@@ -1,8 +1,11 @@
-package br.com.filipe.brenner.controle.estudante.dto;
+package br.com.filipe.brenner.controle.estudante.dto.subject;
 
 import br.com.filipe.brenner.controle.estudante.model.Teacher;
 
-public class CreateSubjectDTOResponse {
+
+public class EditSubjectRequestDTO {
+
+    private Long id;
 
     private String name;
 
@@ -16,6 +19,14 @@ public class CreateSubjectDTOResponse {
 
     public String getName() {
         return name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setName(String name) {
@@ -52,5 +63,10 @@ public class CreateSubjectDTOResponse {
 
     public void setMinimumAverage(Float minimumAverage) {
         this.minimumAverage = minimumAverage;
+    }
+
+    @Override
+    public String toString(){
+        return String.format("%s - %s", this.code, this.name);
     }
 }
