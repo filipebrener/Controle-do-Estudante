@@ -1,14 +1,35 @@
 package br.com.filipe.brenner.controle.estudante.model;
 
-public class Notification {
+import javax.persistence.*;
+import java.io.Serial;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "notification")
+public class Notification implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private String content;
 
+    @ManyToOne
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
     private Student student;
 
+    @ManyToOne
+    @JoinColumn(name = "activity_id", referencedColumnName = "id")
     private Activity activity;
 
     private boolean sent;
+
+    public Long getId() {
+        return id;
+    }
 
     public String getContent() {
         return content;

@@ -2,10 +2,14 @@ package br.com.filipe.brenner.controle.estudante.model;
 
 import br.com.filipe.brenner.controle.estudante.model.Enum.DayOfWeek;
 
+import javax.persistence.*;
+import java.io.Serial;
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.List;
 
-public class NotificationPreferences {
+@Embeddable
+public class NotificationsPreference {
 
     private boolean notifyCurrentDayActivities;
 
@@ -15,8 +19,15 @@ public class NotificationPreferences {
 
     private Time timeToSendWeeklyNotifications;
 
+    @Enumerated(EnumType.STRING)
     private DayOfWeek dayToSendWeeklyNotification;
 
+    @ManyToMany
+    @JoinTable(name="user_notifications_preference_subject_to_notify",
+            joinColumns={@JoinColumn(name="user_id",
+                    referencedColumnName="id")},
+            inverseJoinColumns={@JoinColumn(name="subject_id",
+                    referencedColumnName="id")})
     private List<Subject> subjectsToNotify;
 
     public boolean isNotifyCurrentDayActivities() {
@@ -59,12 +70,8 @@ public class NotificationPreferences {
         this.dayToSendWeeklyNotification = dayToSendWeeklyNotification;
     }
 
-    public List<Subject> getSubjectsToNotify() {
-        return subjectsToNotify;
-    }
+    public List<Subject> getSubjectsToNotify() { return subjectsToNotify; }
 
-    public void setSubjectsToNotify(List<Subject> subjectsToNotify) {
-        this.subjectsToNotify = subjectsToNotify;
-    }
+    public void setSubjectsToNotify(List<Subject> subjectsToNotify) { this.subjectsToNotify = subjectsToNotify; }
 
 }

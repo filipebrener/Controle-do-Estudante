@@ -3,10 +3,15 @@ package br.com.filipe.brenner.controle.estudante.model;
 import br.com.filipe.brenner.controle.estudante.dto.subject.CreateSubjectRequestDTO;
 
 import javax.persistence.*;
+import java.io.Serial;
+import java.io.Serializable;
 
 @Entity
+@Table(name = "subject")
+public class Subject implements Serializable {
 
-public class Subject {
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,7 +22,6 @@ public class Subject {
     private String code;
 
     @ManyToOne
-    @JoinColumn(name = "TEACHER_ID", referencedColumnName = "ID")
     private Teacher teacher;
 
     private Float totalPoints;

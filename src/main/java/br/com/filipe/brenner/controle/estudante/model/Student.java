@@ -1,6 +1,9 @@
 package br.com.filipe.brenner.controle.estudante.model;
 
-public class Student {
+import javax.persistence.*;
+
+@Entity
+public class Student extends UserModel {
 
     private String name;
 
@@ -10,8 +13,11 @@ public class Student {
 
     private String phoneNumber;
 
-    // TODO Verificar melhor forma de armazenar o ícone
-//    private Blob icon;
+    @Embedded
+    private NotificationsPreference preference;
+
+/*    TODO Verificar melhor forma de armazenar o ícone
+    private Blob icon;*/
 
     public String getName() {
         return name;
@@ -44,4 +50,8 @@ public class Student {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    public NotificationsPreference getPreference() { return preference; }
+
+    public void setPreference(NotificationsPreference preference) { this.preference = preference; }
 }

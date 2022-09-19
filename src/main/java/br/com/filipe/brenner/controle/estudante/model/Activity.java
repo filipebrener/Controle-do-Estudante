@@ -1,22 +1,40 @@
 package br.com.filipe.brenner.controle.estudante.model;
 
+import javax.persistence.*;
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Activity {
+@Entity
+@Table(name = "activity")
+public class Activity implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private LocalDateTime time;
 
     private Float totalScore;
 
     private Float scoreReached;
 
+    @ManyToOne
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
     private Student student;
 
+    @ManyToOne
+    @JoinColumn(name = "subject_id", referencedColumnName = "id")
     private Subject subject;
 
     private String comments;
 
     private String local;
+
+    public Long getId() {
+        return id;
+    }
 
     public String getLocal() {
         return local;

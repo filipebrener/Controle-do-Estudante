@@ -1,24 +1,25 @@
 package br.com.filipe.brenner.controle.estudante.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
+public class Teacher extends UserModel {
 
-public class Teacher {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     private String name;
 
     private String email;
 
+    @OneToMany
+    @JoinTable(name="teacher_subject",
+            joinColumns={@JoinColumn(name="teacher_id",
+            referencedColumnName="id")},
+            inverseJoinColumns={@JoinColumn(name="subject_id",
+            referencedColumnName="id")})
+    private List<Subject> subjects;
+
     public String getName() {
         return name;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public void setName(String name) {
@@ -31,5 +32,13 @@ public class Teacher {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<Subject> subjects) {
+        this.subjects = subjects;
     }
 }

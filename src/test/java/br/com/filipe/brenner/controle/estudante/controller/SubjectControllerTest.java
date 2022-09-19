@@ -1,4 +1,4 @@
-package br.com.filipe.brenner.controle.estudante.controllers;
+package br.com.filipe.brenner.controle.estudante.controller;
 
 import br.com.filipe.brenner.controle.estudante.dto.http.ResponseWrapper;
 import br.com.filipe.brenner.controle.estudante.dto.subject.CreateSubjectRequestDTO;
