@@ -18,8 +18,8 @@ public class Notification implements Serializable {
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "student_id", referencedColumnName = "id")
-    private Student student;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private UserModel receiver;
 
     @ManyToOne
     @JoinColumn(name = "activity_id", referencedColumnName = "id")
@@ -39,12 +39,12 @@ public class Notification implements Serializable {
         this.content = content;
     }
 
-    public Student getStudent() {
-        return student;
+    public UserModel getUser() {
+        return receiver;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setUser(UserModel user) {
+        this.receiver = user;
     }
 
     public Activity getActivity() {

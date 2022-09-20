@@ -1,6 +1,5 @@
 package br.com.filipe.brenner.controle.estudante.model;
 
-
 import br.com.filipe.brenner.controle.estudante.model.Enum.RoleName;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -9,7 +8,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "role")
-public class RoleModel implements GrantedAuthority, Serializable {
+public class Role implements GrantedAuthority, Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

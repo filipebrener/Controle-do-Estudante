@@ -22,7 +22,7 @@ public class Subject implements Serializable {
     private String code;
 
     @ManyToOne
-    private Teacher teacher;
+    private UserModel teacher;
 
     private Float totalPoints;
 
@@ -60,11 +60,11 @@ public class Subject implements Serializable {
         this.code = code;
     }
 
-    public Teacher getTeacher() {
+    public UserModel getTeacher() {
         return teacher;
     }
 
-    public void setTeacher(Teacher teacher) {
+    public void setTeacher(UserModel teacher) {
         this.teacher = teacher;
     }
 

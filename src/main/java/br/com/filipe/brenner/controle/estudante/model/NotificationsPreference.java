@@ -8,8 +8,16 @@ import java.io.Serializable;
 import java.sql.Time;
 import java.util.List;
 
-@Embeddable
+@Entity
+@Table(name = "user_notifications_preference")
 public class NotificationsPreference {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @OneToOne
+    private UserModel owner;
 
     private boolean notifyCurrentDayActivities;
 
@@ -32,6 +40,14 @@ public class NotificationsPreference {
 
     public boolean isNotifyCurrentDayActivities() {
         return notifyCurrentDayActivities;
+    }
+
+    public UserModel getOwner() {
+        return owner;
+    }
+
+    public void setOwner(UserModel owner) {
+        this.owner = owner;
     }
 
     public void setNotifyCurrentDayActivities(boolean notifyCurrentDayActivities) {

@@ -21,8 +21,8 @@ public class Activity implements Serializable {
     private Float scoreReached;
 
     @ManyToOne
-    @JoinColumn(name = "student_id", referencedColumnName = "id")
-    private Student student;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private UserModel owner;
 
     @ManyToOne
     @JoinColumn(name = "subject_id", referencedColumnName = "id")
@@ -68,12 +68,12 @@ public class Activity implements Serializable {
         this.scoreReached = scoreReached;
     }
 
-    public Student getStudent() {
-        return student;
+    public UserModel getOwner() {
+        return owner;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setOwner(UserModel owner) {
+        this.owner = owner;
     }
 
     public Subject getSubject() {

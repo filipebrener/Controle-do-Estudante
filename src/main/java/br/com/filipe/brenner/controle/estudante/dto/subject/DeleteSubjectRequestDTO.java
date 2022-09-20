@@ -1,7 +1,7 @@
 package br.com.filipe.brenner.controle.estudante.dto.subject;
 
-import br.com.filipe.brenner.controle.estudante.model.Teacher;
 
+import br.com.filipe.brenner.controle.estudante.model.UserModel;
 
 public class DeleteSubjectRequestDTO {
 
@@ -11,7 +11,7 @@ public class DeleteSubjectRequestDTO {
 
     private String code;
 
-    private Teacher teacher;
+    private UserModel teacher;
 
     private Float totalPoints;
 
@@ -41,11 +41,11 @@ public class DeleteSubjectRequestDTO {
         this.code = code;
     }
 
-    public Teacher getTeacher() {
+    public UserModel getUserModel() {
         return teacher;
     }
 
-    public void setTeacher(Teacher teacher) {
+    public void setUserModel(UserModel teacher) {
         this.teacher = teacher;
     }
 
