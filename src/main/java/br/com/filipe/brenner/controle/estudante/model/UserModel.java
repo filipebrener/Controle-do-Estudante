@@ -41,6 +41,10 @@ public class UserModel implements UserDetails, Serializable {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     protected List<Role> roles;
 
+    public UserModel(){
+        // construtor padrão
+    }
+
     public UserModel(CreateUserRequestDTO payload) {
         this.username = payload.getUsername();
         this.password = passwordEncoder().encode(payload.getPassword());
