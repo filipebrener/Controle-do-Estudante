@@ -52,6 +52,14 @@ public class UserModel implements UserDetails, Serializable {
         this.celPhoneNumber = payload.getCelPhoneNumber();
     }
 
+    public UserModel(String username, String password, String celPhoneNumber, String email, List<Role> roles) {
+        this.username = username;
+        this.password = passwordEncoder().encode(password);
+        this.celPhoneNumber = celPhoneNumber;
+        this.email = email;
+        this.roles = roles;
+    }
+
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }

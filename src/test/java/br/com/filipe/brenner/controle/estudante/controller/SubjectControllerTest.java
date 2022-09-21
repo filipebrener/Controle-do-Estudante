@@ -3,6 +3,7 @@ package br.com.filipe.brenner.controle.estudante.controller;
 import br.com.filipe.brenner.controle.estudante.dto.http.ResponseWrapper;
 import br.com.filipe.brenner.controle.estudante.dto.subject.CreateSubjectRequestDTO;
 import br.com.filipe.brenner.controle.estudante.dto.subject.SubjectResponseDTO;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +15,11 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SubjectControllerTest extends BaseControllerTest{
 
     private final static String ENDPOINT = "/subject";
+
+    @BeforeEach
+    public void beforeEach(){
+        createMasterUser();
+    }
 
     @Test
     public void create(){
@@ -28,6 +34,7 @@ public class SubjectControllerTest extends BaseControllerTest{
 
         var response =  this.testClient.post()
                 .uri(ENDPOINT + "/create")
+                .headers(httpHeaders -> httpHeaders.setBasicAuth(MASTER_NAME, MASTER_PASSWORD))
                 .bodyValue(payload)
                 .exchange()
                 .expectBody(ResponseWrapper.class)

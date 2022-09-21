@@ -19,6 +19,14 @@ public class Role implements GrantedAuthority, Serializable {
     private RoleName roleName;
 
 
+    public Role() {
+        // construtor padrão
+    }
+
+    public Role(RoleName roleName) {
+        this.roleName = roleName;
+    }
+
     @Override
     public String getAuthority() {
         return this.roleName.toString();
